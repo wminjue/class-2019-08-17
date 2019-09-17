@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(fivethirtyeight)
 library(tidyverse)
 library(knitr)
+library(ggthemes)
 ```
 
 
@@ -22,7 +23,7 @@ congress_age %>%
   filter(party %in% c("D", "R")) %>%
   group_by(year, party)%>%
   summarise(average_age = mean(age)) %>%
-  ggplot(aes(x = year, y = average_age, group = party, color = party)) + geom_line() + labs(title = "Average Congressional Age By Year", subtitle = "At start of term, 1947-2013", source = "538 R Package") 
+  ggplot(aes(x = year, y = average_age, group = party, color = party)) + geom_line() + labs(title = "Average Congressional Age By Year", subtitle = "At start of term, 1947-2013", source = "538 R Package") + theme_fivethirtyeight() + scale_color_fivethirtyeight()
 ```
 
 ## Including Plots
