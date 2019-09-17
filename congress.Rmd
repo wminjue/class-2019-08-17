@@ -1,0 +1,36 @@
+---
+title: "Congressional Ages"
+author: "Minjue Wu"
+date: "9/17/2019"
+output: html_document
+---
+
+```{r setup, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(fivethirtyeight)
+library(tidyverse)
+library(knitr)
+```
+
+
+
+```{r}
+data("congress_age")
+
+congress_age %>% 
+  mutate(year = format(termstart, "%Y")) %>%
+  filter(party %in% c("D", "R")) %>%
+  group_by(year, party)%>%
+  summarise(average_age = mean(age)) %>%
+  ggplot(aes(x = year, y = average_age, group = party, color = party)) + geom_line() + labs(title = "Average Congressional Age By Year", subtitle = "At start of term, 1947-2013", source = "538 R Package") 
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
